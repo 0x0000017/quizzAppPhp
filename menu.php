@@ -11,6 +11,7 @@ session_start();
 <body>
 	<?php require_once("header.php");?>
 	<hr class = "divider"/>
+	<br>
 	<center>
 	<h2 class ="title"> Choose your type of quiz !</h2>
 	<br><br><br><br>

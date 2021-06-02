@@ -60,6 +60,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["email"] = $email; 
 							$_SESSION["firstName"] = $firstName;
 							
+							if(isset($_SESSION["email"]) && $_SESSION["email"] === "admin"){
+								$_SESSION["admin"] = true;
+							}
+							
 							if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 								if (isset($_SESSION["login_redirect"])){
 									header("Location: " . $_SESSION["login_redirect"]);
@@ -129,7 +133,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			<h5>Don't have an account yet? <a href ="register.php">Sign Up</a></h5>
 			</div>
 				<div class ="xtra">
-				<!-- fuck this shit -->
 				<br><br><br>
 			</div>
 	</div>

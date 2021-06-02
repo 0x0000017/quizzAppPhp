@@ -132,21 +132,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Quizbeengo!</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
 	<!-- bootstrap's fking up my layout-->
 	
-	<style>
-	body {
-		background: #FFD75A 0% 0% no-repeat padding-box;
-		opacity: 1;
-	}
-	</style>
 </head>
 <body>
 	<?php require_once("header.php");?>
-	<hr class = "divider"/>
-	<div class = "containerbg">
+	<hr class = "divider">
 	<center>
 		<br><BR>
 		<div class ="register"> 

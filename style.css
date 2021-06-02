@@ -11,36 +11,48 @@ body {
 	
 }
 
-.header {
-  padding: 20px;
-  background: white;
-  color: white;
+.flexHeader {
+	height: 100px;
+	width: 100%;
+	display: flex;	
+	background-color: #fff;
 }
-.header {
+.flexHeader .leftSide {
+	width: 25%;
+
+}
+.flexHeader .blankSpace {
+	width: 50%;
+}
+.flexHeader .rightSide {
+	width: 25%;
+	position: relative;
+	display: inline-block;
+	
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
-  height: 15%;
 }
-.header-right {
-	padding-top: 15px;
-	float: right;
-	width:	30%;
-	text-align: center;
+li {
+  float: left;
+  color: #000;
 }
-.header-right .name{
-	color: black;
-	padding-top: 25px;
+li a {
+  display: inline-block;
+  color: #000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-.header-right .logout{
-	color: black;
-	float: left;
-	text-align: center;
-	text-decoration: none;
-	font-size: 18px; 
-	line-height: 25px;
-	border-radius: 4px;
+li a:hover {
+  background-color: #00ff00;
+  border-radius: 30px;
 }
+
 
 .start-btn {
     position: fixed;
@@ -89,7 +101,6 @@ hr.divider {
 	border-radius: 45px;
 	opacity: 1;
 }
-
 .login input[type=text] {
   width: 40%;
   padding: 12px 20px;
@@ -206,3 +217,4 @@ hr.divider {
 	border-radius: 25px;
 	
 }
+
