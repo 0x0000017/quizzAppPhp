@@ -1,5 +1,56 @@
 <?php
 session_start();
+require_once("admin/users.php");
+
+$quizTitle = $tfQuest = $tfAns = '';
+$quizTitle_err = $tfQuest_err = $tfAns_err = '';
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	
+
+	if(empty(trim($_POST["quizTitle"]))){
+        $quizTitle_err = "Please enter quiz title.";
+    } else{
+		$quizTitle = trim($_POST["quizTitle"]);
+    }
+	
+	if(empty(trim($_POST["tfQuest"]))){
+        $tfQuest_err = "Please enter your question.";
+    } else{
+		$tfQuest = trim($_POST["tfQuest"]);
+	}
+	
+    if(!empty($_POST['radio'])) {
+          $tfAns = $_POST['radio'];
+        } else {
+          $tfAns_err = "Please select the value.";
+        }
+		
+	if(empty($quizTitle_err) && empty($tfQuest_err) &&  empty($tfAns_err)) {
+		$sql = "INSERT INTO questionstf (quizTitle, tfQuest, tfAns) VALUES (?, ?, ?)";
+		
+		if($stmt = mysqli_prepare($link, $sql)){
+			mysqli_stmt_bind_param($stmt, "sss", $param_quizTitle, $param_tfQuest, $param_tfAns);
+			
+			$param_quizTitle = $quizTitle;
+			$param_tfQuest = $tfQuest;
+			$param_tfAns = $tfAns;
+			
+			if(mysqli_stmt_execute($stmt)){
+				$_SESSION["tf"] = true;
+			} else {
+                echo '<script>alert("Oops! Something went wrong. Please try again later.");</script>';
+            }
+			mysqli_stmt_close($stmt);
+		}
+	}	
+	mysqli_close($link);	
+	
+	$quizTitle = '';
+	$tfQuest =  '';
+	$tfAns = '';
+}
+	
 ?>
 <!DOCTYPE html>
 <head>
@@ -19,7 +70,8 @@ session_start();
 		<div class ="xtraSpace">
 		</div>
 		<div class ="quizArea">
-			<input type ="text" placeholder ="&#xf040;Your Quiz Title Here..." name ="quizTitle" id="quizTitle"
+		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
+			<input type ="text" placeholder ="&#xf040;Your Quiz Title Here..." name ="quizTitle" value="<?php echo $quizTitle; ?>"
 			style ="width: 60%;
 					height: 25px;
 					margin: 10px;
@@ -27,8 +79,9 @@ session_start();
 					border-radius: 4px;
 					background: white;
 					font-family:Poppins, FontAwesome">
+					<span class="invalid-feedback"><?php echo $quizTitle_err; ?></span>
 			<br><br><br>
-			<input type ="text" placeholder ="&#xf128; Your Question Here..." name ="tfQuest id="tfQuest"
+			<input type ="text" placeholder ="&#xf128; Your Question Here..." name ="tfQuest" value="<?php echo $tfQuest; ?>"
 			style ="width: 60%;
 					height: 25px;
 					margin: 0px 0px 0px 70px;
@@ -36,9 +89,11 @@ session_start();
 					padding: 12px 20px; 
 					background: white;
 					font-family:Poppins, FontAwesome">
+					<span class="invalid-feedback"><?php echo $tfQuest_err; ?></span>
 			<br><br>
 			<h4 style ="margin: 0px 0px 0px 70px;">Answer</h4>
-			<input type ="radio" value ="true" name ="tf" id="true"
+			<span class="invalid-feedback"><?php echo $tfAns_err; ?></span>
+			<input type ="radio" name ="radio" value ="true"
 			style ="width: 10%;
 					height: 25px;
 					margin: 10px 0px 0px 110px;
@@ -48,7 +103,7 @@ session_start();
 					font-family:Poppins, FontAwesome">
 			<label for ="true">True</label>
 			<br>
-			<input type ="radio" value ="false" name ="tf" id="false"
+			<input type ="radio" name ="radio" value ="false"
 			style ="width: 10%;
 					height: 25px;
 					margin: 10px 0px 0px 110px;
@@ -69,18 +124,7 @@ session_start();
 			<br><br>
 		</div>
 		<div class ="xtraSpace">
-			<input type ="submit" value ="&#xf0c7; Save Quiz"
-				style ="
-						border-radius: 20px;
-						float: left;
-						padding: 5px;	
-						font-size: 15px;
-						background-color: #FFC303;
-						color: #fff;
-						position: fixed;
-						bottom: 20px;
-						right: 250px;
-						font-family:Poppins, FontAwesome">
+			<a href ="menu.php">&#xf0c7; Save </a>
 		</div>
 	</div>
 </body>

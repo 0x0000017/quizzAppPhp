@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$quizCorrectAns = trim($_POST["quizCorrectAns"]);
 	}
 	
-	if(empty($quizTitle_err) && empty($quizQuest_err) &&  empty($quizAns1_err) && empty($quizAns2_err) && empty($quizAns3_err) && empty($quizAns4_err) && empty($quizCorrectAns)) {
+	if(empty($quizTitle_err) && empty($quizQuest_err) &&  empty($quizAns1_err) && empty($quizAns2_err) && empty($quizAns3_err) && empty($quizAns4_err) && empty($quizCorrectAns_err)) {
 		$sql = "INSERT INTO questionsmchoice (quizTitle, quizQuest, quizAns1, quizAns2, quizAns3, quizAns4, quizCorrectAns)
 		VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
@@ -77,6 +77,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 	}
 	mysqli_close($link);
+	
+	$quizTitle = '';
+	$quizQuest =  '';
+	$quizAns1 = '';
+	$quizAns2 = '';
+	$quizAns3 = '';
+	$quizAns4 = '';
+	$quizCorrectAns = '';
 }
 ?>
 
@@ -102,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
 		
 		<div class="form-group">
-			<input type ="text" value="<?php echo $quizTitle; ?>" class="form-control <?php echo (!empty($quizTitle_err)) ? 'is-invalid' : ''; ?>" placeholder ="&#xf040;Your Quiz Title Here..." name ="quizTitle"
+			<input type ="text" name ="quizTitle" value="<?php echo $quizTitle; ?>" class="form-control <?php echo (!empty($quizTitle_err)) ? 'is-invalid' : ''; ?>" placeholder ="&#xf040;Your Quiz Title Here..." 
 			style ="width: 60%;
 					height: 25px;
 					margin: 10px;
@@ -116,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			
 			<br><br><br>
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizQuest_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizQuest; ?>" placeholder ="&#xf128; Your Question Here..." name ="quizQuest"
+			<input type ="text" name ="quizQuest" class="form-control <?php echo (!empty($quizQuest_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizQuest; ?>" placeholder ="&#xf128; Your Question Here..." 
 			style ="width: 60%;
 					height: 25px;
 					margin: 0px 0px 0px 35px;
@@ -128,7 +136,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			</div>
 			
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizAns1_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns1; ?>" placeholder ="&#xf040; Type an answer..." name ="quizAns1"
+			<input type ="text" name ="quizAns1" class="form-control <?php echo (!empty($quizAns1_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns1; ?>" placeholder ="&#xf040; Type an answer..." 
 			style ="width: 52%;
 					height: 25px;
 					margin: 10px 0px 0px 100px;
@@ -140,7 +148,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			</div>
 			
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizAns2_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns2; ?>" placeholder ="&#xf040; Type an answer..." name ="quizAns2"
+			<input type ="text" name ="quizAns2" class="form-control <?php echo (!empty($quizAns2_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns2; ?>" placeholder ="&#xf040; Type an answer..." 
 			style ="width: 52%;
 					height: 25px;
 					margin: 10px 0px 0px 100px;
@@ -152,7 +160,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			</div>
 			
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizAns3_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns3; ?>" placeholder ="&#xf040; Type an answer..." name ="quizAns3"
+			<input type ="text" name ="quizAns3" class="form-control <?php echo (!empty($quizAns3_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns3; ?>" placeholder ="&#xf040; Type an answer..." 
 			style ="width: 52%;
 					height: 25px;
 					margin: 10px 0px 0px 100px;
@@ -164,7 +172,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			</div>
 			
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizAns4_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns4; ?>" placeholder ="&#xf040; Type an answer..." name ="quizAns4"
+			<input type ="text" name ="quizAns4" class="form-control <?php echo (!empty($quizAns4_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizAns4; ?>" placeholder ="&#xf040; Type an answer..." 
 			style ="width: 52%;
 					height: 25px;
 					margin: 10px 0px 0px 100px;
@@ -178,7 +186,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			<br><br>
 			<h4 style ="margin: 0px 0px 0px 35px;">Answer</h4>
 			<div class="form-group">
-			<input type ="text" class="form-control <?php echo (!empty($quizCorrectAns_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizCorrectAns; ?>" placeholder ="&#xf058; Type the correct answer..." name ="quizCorrectAns"
+			<input type ="text" name ="quizCorrectAns" class="form-control <?php echo (!empty($quizCorrectAns_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $quizCorrectAns; ?>" placeholder ="&#xf058; Type the correct answer..." 
 			style ="width: 52%;
 					height: 25px;
 					margin: 10px 0px 0px 100px;
@@ -206,18 +214,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			<br><br><br>
 		</div>
 		<div class ="xtraSpace">
-			<input type ="submit" value ="&#xf0c7; Save Quiz"
-				style ="
-						border-radius: 20px;
-						float: left;
-						padding: 5px;	
-						font-size: 15px;
-						background-color: #FFC303;
-						color: #fff;
-						position: fixed;
-						bottom: 20px;
-						right: 250px;
-						font-family:Poppins, FontAwesome">
+			<a href ="menu.php">&#xf0c7; Save </a>
 		</div>
 	</div>
 </body>
